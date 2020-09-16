@@ -7,11 +7,11 @@ export default class PaintBoard extends Component {
       <div>
         <canvas
           className='paint-board__canvas'
-          width='600'
-          height='600'
+          width='400'
+          height='400'
           onMouseDown={this.canvas_mousedown.bind(this)}
           onMouseMove={this.canvas_mousemove.bind(this)}
-          // onMouseOut={this.canvas_mouseout.bind(this)}
+          onMouseOut={this.canvas_mouseout.bind(this)}
           onMouseUp={this.canvas_mouseup.bind(this)}
         >
         </canvas>
@@ -52,6 +52,16 @@ export default class PaintBoard extends Component {
   }
 
   private canvas_mouseup() {
+    this.endDriving();
+  }
+
+  private canvas_mouseout() {
+    if (this.ctx) {
+      this.endDriving();
+    }
+  }
+
+  private endDriving() {
     this.paint = false;
     this.ctx.closePath();
   }
