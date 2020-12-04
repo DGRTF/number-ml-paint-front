@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import Button from '../Button/Button';
+import TextField from '../TextField/TextField';
 import './PaintBoard.scss';
 
 interface IPaintBoardState {
@@ -25,18 +27,17 @@ export default class PaintBoard extends Component<{}, IPaintBoardState> {
           onMouseUp={this.canvas_mouseup.bind(this)}
         >
         </canvas>
-        <button
-          className='paint-board__send-button'
-          onClick={this.sendCanvas.bind(this)}
-        >Отправить</button>
-        <label className='paint-board__label-response'>
-          Результат:
-          <input
-            className='paint-board__response'
-            readOnly
-            value={`${this.state.numberResponse ? this.state.numberResponse : ""}`}>
-          </input>
-        </label>
+        <Button
+          name='Очистить'
+          handler={this.clearCanvas.bind(this)}
+        />
+        <Button
+          name='Отправить'
+          handler={this.sendCanvas.bind(this)}
+        />
+        <TextField
+          name='Результат:'
+          value={`${this.state.numberResponse ? this.state.numberResponse : ""}`} />
       </div>
     )
   }
@@ -111,6 +112,11 @@ export default class PaintBoard extends Component<{}, IPaintBoardState> {
         numberResponse: await response.json(),
       });
     }
+  }
+
+  private clearCanvas() {
+    if (this.ctx)
+      this.ctx.clearRect(0, 0, 400, 400);
   }
 
 }

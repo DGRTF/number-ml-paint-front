@@ -1,0 +1,32 @@
+.text-field {
+  margin: 1em;
+  color: rgba(255, 255, 255, 0.5);
+
+  &:hover {
+    color: #ffffff;
+  }
+
+  &:focus {
+    color: #ffffff;
+  }
+
+  &__field {
+    background-color: #00303f;
+    color: rgba(255, 255, 255, 0.5);
+    border: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+    outline: none;
+    height: 2em;
+    width: 100%;
+
+    &:hover {
+      border-bottom: 1px solid #ffffff;
+      color: #ffffff;
+    }
+
+    &:focus {
+      border-bottom: 1px solid #ffffff;
+      color: #ffffff;
+    }
+  }
+}

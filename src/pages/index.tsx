@@ -1,11 +1,12 @@
 import React from "react";
-import PaintBoard from '../components/PaintBoard';
-import { PageProps } from "gatsby";
+import Header from "../components/Header/Header";
+import PaintBoard from '../components/PaintBoard/PaintBoard';
 import './index.scss';
 
-export default function Home(props: PageProps) {
+export default function Home() {
   return (
     <div className='home'>
+      <Header/>
       <PaintBoard />
     </div>
   );

@@ -1,0 +1,15 @@
+.header {
+  height: 4em;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  background-color: #233237;
+  position: fixed;
+  top: 0;
+
+  &__in {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
+}
