@@ -57,8 +57,7 @@ export default class PaintBoard extends Component<{}, IPaintBoardState> {
     const resultX = ev.clientX - coordinate.left - 2;
     const resultY = ev.clientY - coordinate.top - 2;
     this.ctx.moveTo(resultX, resultY);
-    this.ctx.lineWidth = 25;
-    this.ctx.strokeStyle = 'white';
+    this.ctx.fillStyle = "#FFFFFF";
   }
 
   private canvas_mousemove(ev: React.MouseEvent) {
@@ -66,8 +65,9 @@ export default class PaintBoard extends Component<{}, IPaintBoardState> {
       const coordinate = this.canvas.getBoundingClientRect();
       const resultX = ev.clientX - coordinate.left - 2;
       const resultY = ev.clientY - coordinate.top - 2;
-      this.ctx.lineTo(resultX, resultY);
-      this.ctx.stroke();
+      this.ctx.arc(resultX, resultY, 15, 0, 2 * Math.PI);
+      this.ctx.fill();
+      this.ctx.closePath();
     };
   }
 
@@ -83,7 +83,6 @@ export default class PaintBoard extends Component<{}, IPaintBoardState> {
 
   private endDriving() {
     this.paint = false;
-    this.ctx.closePath();
   }
 
   private async sendCanvas(ev: React.MouseEvent) {
