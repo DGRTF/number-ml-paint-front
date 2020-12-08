@@ -18,7 +18,8 @@ export function signIn(formData: FormData) {
       return response.json();
     })
       .then(json => {
-        localStorage.setItem('access_token', json.access_token)
+        localStorage.setItem('access_token', json.access_token);
+        localStorage.setItem('user_name', json.username);
         dispatch(changeName({
           name: json.username,
         }));

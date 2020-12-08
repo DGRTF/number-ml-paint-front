@@ -8,6 +8,7 @@ import './Header.scss';
 interface ImapDispatchToProps {
   showHiddenRegistrationForm: showHiddenRegistrationFormType;
   showHiddenSignInForm: showHiddenSignInFormType;
+  changeName: changeNameType;
 }
 
 interface ImapStateToProps {
@@ -18,8 +19,9 @@ interface IHeaderProps extends ImapDispatchToProps, ImapStateToProps { }
 
 class Header extends Component<IHeaderProps>{
   constructor(props: any) {
-    super(props);
+    super(props);;
   }
+
   render() {
     return (
       <header className='header'>
@@ -39,6 +41,22 @@ class Header extends Component<IHeaderProps>{
           </div>}
       </header>
     )
+  }
+
+  componentDidMount() {
+    this.Initialize();
+  }
+
+  Initialize() {
+    const token = localStorage.getItem('access_token');
+
+    if (token) {
+      const name = localStorage.getItem('user_name');
+
+      this.props.changeName({
+        name: name,
+      });
+    }
   }
 
   showRegistrationForm() {
@@ -71,6 +89,11 @@ import {
   showHiddenSignInFormType
 } from '../../store/actions/SignInForm/SignInForm';
 
+import {
+  changeName,
+  changeNameType
+} from '../../store/actions/Header/Header';
+
 
 
 const mapStateToProps = (state: stateType) => {
@@ -83,6 +106,7 @@ function mapDispatchToProps(dispatch: any) {
   return bindActionCreators({
     showHiddenRegistrationForm,
     showHiddenSignInForm,
+    changeName,
   }, dispatch)
 }
 
