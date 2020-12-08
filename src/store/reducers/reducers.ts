@@ -1,10 +1,12 @@
-import {combineReducers} from 'redux';
-import showHiddenRegistrationFormReducer from './RegistratonForm/ShowHiddenRegistrationFormReducer';
+import { combineReducers } from 'redux';
+import registrationFormReducer from './RegistratonForm/RegistrationFormReducer';
 import header from './Header/Header';
+import { signInForm } from './SignInForm/SignInForm';
 
 const appReducers = combineReducers({
-  showHiddenRegistrationFormReducer,
+  registrationFormReducer,
   header,
+  signInForm,
 });
 
 export default appReducers;

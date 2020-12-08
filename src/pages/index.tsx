@@ -5,6 +5,7 @@ import RegistrationForm from "../components/RegistrationForm/RegistrationForm";
 import { Provider } from 'react-redux';
 import store from '../store/store';
 import './index.scss';
+import SignInForm from "../components/SignIn/SignInForm";
 
 export default function Home() {
   return (
@@ -14,6 +15,7 @@ export default function Home() {
           <Header />
           <PaintBoard />
           <RegistrationForm />
+          <SignInForm />
         </div>
       </Provider>
     </React.StrictMode>

@@ -6,7 +6,8 @@ import './Header.scss';
 
 
 interface ImapDispatchToProps {
-  showRegistrationForm: showRegistrationFormType;
+  showHiddenRegistrationForm: showHiddenRegistrationFormType;
+  showHiddenSignInForm: showHiddenSignInFormType;
 }
 
 interface ImapStateToProps {
@@ -29,18 +30,27 @@ class Header extends Component<IHeaderProps>{
             <Button name={this.props.name} />
           </div> :
           <div className='header__in'>
-            <Button name='Войти' />
+            <Button name='Войти'
+              handler={this.showSignInForm.bind(this)} />
             <Button
               name='Зарегистрироваться'
-              handler={this.showRegistration.bind(this)}
+              handler={this.showRegistrationForm.bind(this)}
             />
           </div>}
       </header>
     )
   }
 
-  showRegistration() {
-    this.props.showRegistrationForm();
+  showRegistrationForm() {
+    this.props.showHiddenRegistrationForm({
+      visible: true,
+    });
+  }
+
+  showSignInForm() {
+    this.props.showHiddenSignInForm({
+      visible: true,
+    })
   }
 }
 
@@ -50,10 +60,18 @@ import { connect } from 'react-redux';
 import { stateType } from '../../store/store';
 
 import {
-  showRegistrationForm,
-  showRegistrationFormType
-} from "../../store/actions/RegistrationForm/ShowHiddenRegistrationForm";
+  showHiddenRegistrationForm,
+  showHiddenRegistrationFormType
+} from "../../store/actions/RegistrationForm/RegistrationForm";
+
 import { bindActionCreators } from 'redux';
+
+import {
+  showHiddenSignInForm,
+  showHiddenSignInFormType
+} from '../../store/actions/SignInForm/SignInForm';
+
+
 
 const mapStateToProps = (state: stateType) => {
   return {
@@ -63,7 +81,8 @@ const mapStateToProps = (state: stateType) => {
 
 function mapDispatchToProps(dispatch: any) {
   return bindActionCreators({
-    showRegistrationForm,
+    showHiddenRegistrationForm,
+    showHiddenSignInForm,
   }, dispatch)
 }
 
@@ -72,20 +91,3 @@ export default connect<ImapStateToProps, ImapDispatchToProps, IHeaderProps, stat
   mapStateToProps,
   mapDispatchToProps
 )(Header);
-
-// function f(returnState: stateType) {
-//   const mapStateToProps = (state: stateType) => {
-//     return returnState
-//   }
-
-//   function mapDispatchToProps(dispatch: any) {
-//     return bindActionCreators({
-//       showRegistrationForm,
-//     }, dispatch)
-//   }
-
-//   return connect<ImapStateToProps, ImapDispatchToProps, IHeaderProps, stateType>(
-//     mapStateToProps,
-//     mapDispatchToProps
-//   )(Header);
-// }
