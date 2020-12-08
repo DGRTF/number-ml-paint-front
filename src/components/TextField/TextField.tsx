@@ -4,6 +4,8 @@ import './TextField.scss';
 interface TextFieldProps {
   name?: string;
   value?: string;
+  readonly?: boolean;
+  nameField?: string;
 }
 
 export default class TextField extends Component<TextFieldProps> {
@@ -12,8 +14,9 @@ export default class TextField extends Component<TextFieldProps> {
       <label className='text-field'>
           {this.props.name}
           <input
+            name={this.props.nameField}
             className='text-field__field'
-            readOnly
+            readOnly={this.props.readonly}
             value={this.props.value}>
           </input>
         </label>

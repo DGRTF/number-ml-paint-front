@@ -37,7 +37,8 @@ export default class PaintBoard extends Component<{}, IPaintBoardState> {
         />
         <TextField
           name='Результат:'
-          value={`${this.state.numberResponse ? this.state.numberResponse : ""}`} />
+          value={`${this.state.numberResponse ? this.state.numberResponse : ""}`} 
+          readonly={true}/>
       </div>
     )
   }
@@ -66,6 +67,7 @@ export default class PaintBoard extends Component<{}, IPaintBoardState> {
       const resultX = ev.clientX - coordinate.left - 2;
       const resultY = ev.clientY - coordinate.top - 2;
       this.ctx.arc(resultX, resultY, 15, 0, 2 * Math.PI);
+      this.ctx.moveTo(resultX, resultY);
       this.ctx.fill();
       this.ctx.closePath();
     };
@@ -83,6 +85,7 @@ export default class PaintBoard extends Component<{}, IPaintBoardState> {
 
   private endDriving() {
     this.paint = false;
+    this.ctx.closePath();
   }
 
   private async sendCanvas(ev: React.MouseEvent) {

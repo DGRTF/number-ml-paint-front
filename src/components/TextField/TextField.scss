@@ -1,32 +1,30 @@
 .text-field {
-  margin: 1em;
   color: rgba(255, 255, 255, 0.5);
 
   &:hover {
-    color: #ffffff;
+    color: rgb(204, 204, 204);
   }
 
   &:focus {
-    color: #ffffff;
+    color: rgb(204, 204, 204);
   }
 
   &__field {
-    background-color: #00303f;
-    color: rgba(255, 255, 255, 0.5);
+    background-color: rgb(45, 45, 45);
     border: none;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.5);
     outline: none;
     height: 2em;
     width: 100%;
+    color: rgba(255, 255, 255, 0.5);
+    padding-left: 5%;
+    box-sizing: border-box;
 
     &:hover {
-      border-bottom: 1px solid #ffffff;
-      color: #ffffff;
+      color: rgb(204, 204, 204);
     }
 
     &:focus {
-      border-bottom: 1px solid #ffffff;
-      color: #ffffff;
+      color: rgb(204, 204, 204);
     }
   }
 }

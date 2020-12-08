@@ -7,7 +7,7 @@
 module.exports = {
   /* Your site config here */
   plugins: [
-    "gatsby-plugin-no-sourcemaps",
+    // "gatsby-plugin-no-sourcemaps",
     "gatsby-plugin-sass",
   ],
 }
