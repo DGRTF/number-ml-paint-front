@@ -19,7 +19,7 @@ export default class Form extends Component<IFormProps> {
   render() {
     return (
       <div
-        className='form__container'>
+        className='form'>
         <div className='form__header'>
           <span>{this.props.name}</span>
           <Button name='X' handler={this.props.closeHandler.bind(this)} />
