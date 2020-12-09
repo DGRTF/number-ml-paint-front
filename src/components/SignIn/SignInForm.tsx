@@ -19,26 +19,18 @@ class SignInForm extends Component<ISignInFormProps> {
     return (
       <div
         className={`sign-in ${this.props.visible ? '' : 'sign-in-hidden'}`}>
-        <div
-          className='sign-in__container'>
-          <div className='sign-in__header'>
-            <span>Регистрация</span>
-            <Button name='X' handler={this.hiddenForm.bind(this)} />
-          </div>
-          <form
-            className='sign-in__form'
-            onSubmit={this.signIn.bind(this)}>
-            <TextField
-              nameField='name'
-              name='Password' />
-            <TextField
-              nameField='password'
-              name='Password' />
-            <Button
-              name='Войти'
-            />
-          </form>
-        </div>
+        <Form
+          closeHandler={this.hiddenForm.bind(this)}
+          submitFormHandler={this.signIn.bind(this)}
+          name='Вход'
+          submitButtonName='Войти'>
+          <TextField
+            nameField='name'
+            name='Password' />
+          <TextField
+            nameField='password'
+            name='Password' />
+        </Form>
       </div>
     )
   }
@@ -68,6 +60,7 @@ import {
 } from "../../store/actions/SignInForm/SignInForm";
 
 import { bindActionCreators } from 'redux';
+import Form from '../Form/Form';
 
 
 
