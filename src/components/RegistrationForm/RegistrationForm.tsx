@@ -40,7 +40,7 @@ class RegistrationForm extends Component<IRegistrationFormProps> {
             nameField='password'
             name='Password' />
           <TextField
-            nameField='Again Password'
+            nameField='again-password'
             name='Again Password' />
         </Form>
       </div>
@@ -51,8 +51,15 @@ class RegistrationForm extends Component<IRegistrationFormProps> {
     event.preventDefault();
     const form = event.target as HTMLFormElement;
     const formData = new FormData(form);
-    formData.delete('Again Password')
-    this.props.registration(formData);
+    const pass = formData.get('password');
+    const againPass = formData.get('again-password');
+
+    if (pass === againPass) {
+      formData.delete('again-password');
+      this.props.registration(formData);
+    }else{
+      alert('Пароли не совпадают');
+    }
   }
 
   private hiddenForm() {
