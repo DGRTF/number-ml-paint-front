@@ -30,6 +30,8 @@ class Header extends Component<IHeaderProps>{
         {this.props.name ?
           <div className='header__in'>
             <Button name={this.props.name} />
+            <Button name='Выйти' 
+            handler={this.exitProfile.bind(this)}/>
           </div> :
           <div className='header__in'>
             <Button name='Войти'
@@ -44,10 +46,10 @@ class Header extends Component<IHeaderProps>{
   }
 
   componentDidMount() {
-    this.Initialize();
+    this.initializeName();
   }
 
-  Initialize() {
+  initializeName() {
     const token = localStorage.getItem('access_token');
 
     if (token) {
@@ -69,6 +71,15 @@ class Header extends Component<IHeaderProps>{
     this.props.showHiddenSignInForm({
       visible: true,
     })
+  }
+
+  exitProfile(){
+    localStorage.removeItem('access_token');
+    localStorage.removeItem('user_name');
+    
+    this.props.changeName({
+      name: null,
+    });
   }
 }
 
