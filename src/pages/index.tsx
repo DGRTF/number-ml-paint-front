@@ -6,6 +6,9 @@ import { Provider } from 'react-redux';
 import store from '../store/store';
 import './index.scss';
 import SignInForm from "../components/SignIn/SignInForm";
+import Sidebar from "../components/Sidebar/Sidebar";
+
+
 
 export default function Home() {
   return (
@@ -14,6 +17,7 @@ export default function Home() {
         <div className='home'>
           <Header />
           <PaintBoard />
+          <Sidebar/>
           <RegistrationForm />
           <SignInForm />
         </div>

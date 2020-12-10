@@ -9,6 +9,7 @@ interface ImapDispatchToProps {
   showHiddenRegistrationForm: showHiddenRegistrationFormType;
   showHiddenSignInForm: showHiddenSignInFormType;
   changeName: changeNameType;
+  showHiddenSidebar: showHiddenSidebarType;
 }
 
 interface ImapStateToProps {
@@ -19,19 +20,21 @@ interface IHeaderProps extends ImapDispatchToProps, ImapStateToProps { }
 
 class Header extends Component<IHeaderProps>{
   constructor(props: any) {
-    super(props);;
+    super(props);
   }
 
   render() {
     return (
       <header className='header'>
-        <div className='header__label'></div>
+        <Button name='Menu'
+          handler={this.showSidebar.bind(this)} />
         <div className='header__menu'></div>
+        <div className='header__label'></div>
         {this.props.name ?
           <div className='header__in'>
             <Button name={this.props.name} />
-            <Button name='Выйти' 
-            handler={this.exitProfile.bind(this)}/>
+            <Button name='Выйти'
+              handler={this.exitProfile.bind(this)} />
           </div> :
           <div className='header__in'>
             <Button name='Войти'
@@ -73,13 +76,19 @@ class Header extends Component<IHeaderProps>{
     })
   }
 
-  exitProfile(){
+  exitProfile() {
     localStorage.removeItem('access_token');
     localStorage.removeItem('user_name');
-    
+
     this.props.changeName({
       name: null,
     });
+  }
+
+  showSidebar() {
+    this.props.showHiddenSidebar({
+      visible: true,
+    })
   }
 }
 
@@ -105,6 +114,11 @@ import {
   changeNameType
 } from '../../store/actions/Header/Header';
 
+import {
+  showHiddenSidebar,
+  showHiddenSidebarType
+} from '../../store/actions/Sidebar/Sidebar';
+
 
 
 const mapStateToProps = (state: stateType) => {
@@ -118,6 +132,7 @@ function mapDispatchToProps(dispatch: any) {
     showHiddenRegistrationForm,
     showHiddenSignInForm,
     changeName,
+    showHiddenSidebar,
   }, dispatch)
 }
 

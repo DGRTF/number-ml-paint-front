@@ -24,7 +24,7 @@ class RegistrationForm extends Component<IRegistrationFormProps> {
   render() {
     return (
       <div
-        className={`registration-form ${this.props.visible ? '' : 'registration-form-hidden'}`}>
+        className={`registration-form ${this.props.visible ? '' : 'registration-form_hidden'}`}>
         <Form
           closeHandler={this.hiddenForm.bind(this)}
           submitFormHandler={this.registrationUser.bind(this)}

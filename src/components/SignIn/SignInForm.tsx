@@ -18,7 +18,7 @@ class SignInForm extends Component<ISignInFormProps> {
   render() {
     return (
       <div
-        className={`sign-in ${this.props.visible ? '' : 'sign-in-hidden'}`}>
+        className={`sign-in ${this.props.visible ? '' : 'sign-in_hidden'}`}>
         <Form
           closeHandler={this.hiddenForm.bind(this)}
           submitFormHandler={this.signIn.bind(this)}
