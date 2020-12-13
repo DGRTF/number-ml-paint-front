@@ -6,10 +6,10 @@ import './Header.scss';
 
 
 interface ImapDispatchToProps {
-  showHiddenRegistrationForm: showHiddenRegistrationFormType;
-  showHiddenSignInForm: showHiddenSignInFormType;
-  changeName: changeNameType;
-  showHiddenSidebar: showHiddenSidebarType;
+  showHiddenRegistrationForm?: showHiddenRegistrationFormType;
+  showHiddenSignInForm?: showHiddenSignInFormType;
+  changeName?: changeNameType;
+  showHiddenSidebar?: showHiddenSidebarType;
 }
 
 interface ImapStateToProps {
@@ -26,16 +26,19 @@ class Header extends Component<IHeaderProps>{
   render() {
     return (
       <header className='header'>
-        <Button name='Menu'
-          handler={this.showSidebar.bind(this)} />
-        <div className='header__menu'></div>
-        <div className='header__label'></div>
         {this.props.name ?
-          <div className='header__in'>
-            <Button name={this.props.name} />
-            <Button name='Выйти'
-              handler={this.exitProfile.bind(this)} />
-          </div> :
+          <>
+            <Button name='Menu'
+              handler={this.showSidebar.bind(this)} />
+            <div className='header__menu'></div>
+            <div className='header__label'></div>
+
+            <div className='header__in'>
+              <Button name={this.props.name} />
+              <Button name='Выйти'
+                handler={this.exitProfile.bind(this)} />
+            </div>
+          </> :
           <div className='header__in'>
             <Button name='Войти'
               handler={this.showSignInForm.bind(this)} />

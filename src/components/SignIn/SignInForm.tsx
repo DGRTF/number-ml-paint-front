@@ -4,8 +4,8 @@ import TextField from '../TextField/TextField';
 import './SignInForm.scss';
 
 interface ImapDispatchToProps {
-  showHiddenSignInForm: showHiddenSignInFormType;
-  signIn: signInType;
+  showHiddenSignInForm?: showHiddenSignInFormType;
+  signIn?: signInType;
 }
 
 interface ImapStateToProps {

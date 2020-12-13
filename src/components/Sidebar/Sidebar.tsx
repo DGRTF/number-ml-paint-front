@@ -6,12 +6,11 @@ import Button from '../Button/Button';
 
 
 interface ImapDispatchToProps {
-  showHiddenSidebar: showHiddenSidebarType;
-  changeContent: changeContentType;
+  showHiddenSidebar?: showHiddenSidebarType;
 }
 
 interface ImapStateToProps {
-  visible: boolean;
+  visible?: boolean;
 }
 
 interface ISidebarProps extends ImapDispatchToProps, ImapStateToProps { }
@@ -22,10 +21,7 @@ class Sidebar extends Component<ISidebarProps> {
       <div className={`side-bar ${this.props.visible ? '' : 'side-bar_hidden'}`}>
         <Button name='Скрыть'
           handler={this.hiddenSidebar.bind(this)} />
-        <Button name='Paint board' 
-        handler={this.openPaintBoard.bind(this)}/>
-        <Button name='Video stream' 
-        handler={this.openVideoStream.bind(this)}/>
+          {this.props.children}
       </div>
     )
   }
@@ -33,18 +29,6 @@ class Sidebar extends Component<ISidebarProps> {
   hiddenSidebar() {
     this.props.showHiddenSidebar({
       visible: false,
-    });
-  }
-
-  openPaintBoard(){
-    this.props.changeContent({
-      content: 'PaintBoard',
-    });
-  }
-
-  openVideoStream(){
-    this.props.changeContent({
-      content: 'VideoStream',
     });
   }
 }
@@ -62,7 +46,6 @@ import {
 import { bindActionCreators } from 'redux';
 
 import {
-   changeContentType,
   changeContent } from '../../store/actions/Home/Home';
 
 
