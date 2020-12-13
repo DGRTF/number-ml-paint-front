@@ -1,41 +1,43 @@
-import React, { Suspense } from "react";
+import React, { Component } from "react";
 import './Home.scss';
 
-import Header from "../../components/Header/Header";
-import RegistrationForm from "../../components/RegistrationForm/RegistrationForm";
-import SignInForm from "../../components/SignIn/SignInForm";
-import Sidebar from "../../components/Sidebar/Sidebar";
+import Header from "../Header/Header";
+import RegistrationForm from "../RegistrationForm/RegistrationForm";
+import SignInForm from "../SignIn/SignInForm";
+import Sidebar from "../Sidebar/Sidebar";
+import PaintBoard from '../../components/PaintBoard/PaintBoard';
+import VideoStream from '../../components/VideoStream/VideoStream';
 
-const PaintBoard = React.lazy(() => import('../../components/PaintBoard/PaintBoard'));
-const VideoStream = React.lazy(() => import('../../components/VideoStream/VideoStream'));
+// const PaintBoard = React.lazy(() => import('../../components/PaintBoard/PaintBoard'));
+// const VideoStream = React.lazy(() => import('../../components/VideoStream/VideoStream'));
 
 
 
 interface ImapDispatchToProps {
-  changeContent: changeContentType;
+  changeContent?: changeContentType;
 }
 
 interface ImapStateToProps {
-  content: contentTypes;
+  content?: contentTypes;
 }
 
 interface IHomeProps extends ImapDispatchToProps, ImapStateToProps { }
 
-const Home = (props: IHomeProps) => {
-  return (
-    <div className='home'>
-      <Header />
-      <Suspense fallback={<div>Загрузка...</div>}>
-        {setContent()}
-      </Suspense>
-      <Sidebar />
-      <RegistrationForm />
-      <SignInForm />
-    </div>
-  );
+class Home extends Component<IHomeProps>{
+  render() {
+    return (
+      <div className='home'>
+        <Header />
+        {this.setContent.bind(this)}
+        <Sidebar />
+        <RegistrationForm />
+        <SignInForm />
+      </div>
+    );
+  }
 
-  function setContent() {
-    switch (props.content) {
+  setContent() {
+    switch (this.props.content) {
       case 'PaintBoard':
         return <PaintBoard />
       case 'VideoStream':

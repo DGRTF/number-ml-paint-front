@@ -6,8 +6,8 @@ import './RegistrationForm.scss';
 
 
 interface ImapDispatchToProps {
-  showHiddenRegistrationForm: showHiddenRegistrationFormType;
-  registration: registrationType;
+  showHiddenRegistrationForm?: showHiddenRegistrationFormType;
+  registration?: registrationType;
 }
 
 interface ImapStateToProps {

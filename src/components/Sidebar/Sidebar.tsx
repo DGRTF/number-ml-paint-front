@@ -6,12 +6,12 @@ import Button from '../Button/Button';
 
 
 interface ImapDispatchToProps {
-  showHiddenSidebar: showHiddenSidebarType;
-  changeContent: changeContentType;
+  showHiddenSidebar?: showHiddenSidebarType;
+  changeContent?: changeContentType;
 }
 
 interface ImapStateToProps {
-  visible: boolean;
+  visible?: boolean;
 }
 
 interface ISidebarProps extends ImapDispatchToProps, ImapStateToProps { }

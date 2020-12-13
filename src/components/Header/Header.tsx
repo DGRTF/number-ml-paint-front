@@ -6,10 +6,10 @@ import './Header.scss';
 
 
 interface ImapDispatchToProps {
-  showHiddenRegistrationForm: showHiddenRegistrationFormType;
-  showHiddenSignInForm: showHiddenSignInFormType;
-  changeName: changeNameType;
-  showHiddenSidebar: showHiddenSidebarType;
+  showHiddenRegistrationForm?: showHiddenRegistrationFormType;
+  showHiddenSignInForm?: showHiddenSignInFormType;
+  changeName?: changeNameType;
+  showHiddenSidebar?: showHiddenSidebarType;
 }
 
 interface ImapStateToProps {

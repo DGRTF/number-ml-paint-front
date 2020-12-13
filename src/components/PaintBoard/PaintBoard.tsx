@@ -4,7 +4,7 @@ import TextField from '../TextField/TextField';
 import './PaintBoard.scss';
 
 interface IPaintBoardState {
-  numberResponse: number;
+  numberResponse?: number;
 }
 
 export default class PaintBoard extends Component<{}, IPaintBoardState> {
