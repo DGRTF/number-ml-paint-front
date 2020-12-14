@@ -1,13 +1,13 @@
-import React from "react";
+import React, { Suspense } from "react";
 import { Provider } from 'react-redux';
 import { createBrowserHistory } from 'history';
 import { Router, Route, Switch } from 'react-router-dom';
 import './index.scss';
 
 import store from '../store/store';
-// import Home from "../components/Home/Home";
 
-import Home from "../components/Home/Home";
+const Home = React.lazy(() => import('./Home/Home'));
+const PersonalAccount = React.lazy(() => import('./PersonalAccount/PersonalAccount'));
 
 
 
@@ -21,10 +21,11 @@ export default function Index() {
         <React.StrictMode>
           <div className='index'>
             <Switch>
-              <Route exact path="/" component={Home} />
-              {/* <Route path="/about" component={About} /> */}
+              <Suspense fallback={<div>Загрузка...</div>}>
+                <Route exact path="/" component={Home} />
+                <Route path="/personal" component={PersonalAccount} />
+              </Suspense>
             </Switch>
-            {/* <Home /> */}
           </div>
         </React.StrictMode>
       </Router>

@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
-import Button from '../Button/Button';
+import { Link } from "react-router-dom";
 import './Header.scss';
+
+import Button from '../Button/Button';
 
 
 
@@ -34,7 +36,9 @@ class Header extends Component<IHeaderProps>{
             <div className='header__label'></div>
 
             <div className='header__in'>
-              <Button name={this.props.name} />
+              <Link to='personal'>
+                <Button key='1' name={this.props.name} />
+              </Link>
               <Button name='Выйти'
                 handler={this.exitProfile.bind(this)} />
             </div>

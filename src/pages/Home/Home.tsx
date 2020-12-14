@@ -1,14 +1,12 @@
-import React, { Component } from "react";
-import './HomeContainer.scss';
+import React, { Component, Suspense } from 'react';
+import './Home.scss';
 
-import Header from "../Header/Header";
-import RegistrationForm from "../RegistrationForm/RegistrationForm";
-import SignInForm from "../SignIn/SignInForm";
-import PaintBoard from '../PaintBoard/PaintBoard';
-import VideoStream from '../VideoStream/VideoStream';
+import Header from "../../components/Header/Header";
+import RegistrationForm from "../../components/RegistrationForm/RegistrationForm";
+import SignInForm from "../../components/SignIn/SignInForm";
 
-// const PaintBoard = React.lazy(() => import('../../components/PaintBoard/PaintBoard'));
-// const VideoStream = React.lazy(() => import('../../components/VideoStream/VideoStream'));
+const PaintBoard = React.lazy(() => import('../../components/PaintBoard/PaintBoard'));
+const VideoStream = React.lazy(() => import('../../components/VideoStream/VideoStream'));
 
 
 
@@ -27,7 +25,9 @@ class Home extends Component<IHomeProps>{
     return (
       <div className='home'>
         <Header />
-        {this.setContent()}
+        <Suspense fallback={<div>Загрузка...</div>}>
+          {this.setContent()}
+        </Suspense>
         <HomeSidebar />
         <RegistrationForm />
         <SignInForm />
@@ -48,25 +48,23 @@ class Home extends Component<IHomeProps>{
 }
 
 
-
 import { connect } from 'react-redux';
 import { stateType } from '../../store/store';
 
 import {
-  contentTypes,
-  changeContent,
-  changeContentType
+  changeContent, contentTypes
 } from "../../store/actions/Home/Home";
 
 import { bindActionCreators } from 'redux';
-import HomeSidebar from "../HomeSidebar/HomeSidebar";
+import { changeContentType } from '../../store/actions/Home/Home';
+import HomeSidebar from '../../components/HomeSidebar/HomeSidebar';
 
 
 
 const mapStateToProps = (state: stateType) => {
   return {
     content: state.home.content,
-  }
+  };
 }
 
 function mapDispatchToProps(dispatch: any) {

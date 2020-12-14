@@ -17,7 +17,8 @@ class PersonalAccountSideBar extends Component<IPersonalAccountSideBarProps> {
     return (
       <>
         <Sidebar>
-          {[<Button name='Мои модели'/>]}
+          <Button name='Мои модели'/>
+          <></>
         </Sidebar>
       </>
     )
