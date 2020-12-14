@@ -3,7 +3,7 @@ import './Button.scss';
 
 interface ButtonProps {
   name?: string;
-  handler?: () => void;
+  handler?: (ev: React.MouseEvent) => void;
 }
 
 export default class Button extends Component<ButtonProps, {}> {

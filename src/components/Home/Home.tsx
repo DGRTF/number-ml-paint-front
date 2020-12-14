@@ -1,27 +1,15 @@
-<<<<<<< HEAD:src/pages/Home/Home.tsx
-import React, { Component } from 'react'
-import HomeContainer from '../../components/HomeContainer/HomeContainer'
-
-export default class Home extends Component {
-  render() {
-    return (
-      <>
-        <HomeContainer/>
-      </>
-    )
-=======
-import React, { Component } from "react";
+import React, { Component, Suspense } from 'react';
 import './Home.scss';
 
 import Header from "../Header/Header";
 import RegistrationForm from "../RegistrationForm/RegistrationForm";
 import SignInForm from "../SignIn/SignInForm";
-import Sidebar from "../Sidebar/Sidebar";
-import PaintBoard from '../../components/PaintBoard/PaintBoard';
-import VideoStream from '../../components/VideoStream/VideoStream';
 
-// const PaintBoard = React.lazy(() => import('../../components/PaintBoard/PaintBoard'));
-// const VideoStream = React.lazy(() => import('../../components/VideoStream/VideoStream'));
+// import PaintBoard from '../PaintBoard/PaintBoard';
+// import VideoStream from '../VideoStream/VideoStream';
+
+const PaintBoard = React.lazy(() => import('../PaintBoard/PaintBoard'));
+const VideoStream = React.lazy(() => import('../VideoStream/VideoStream'));
 
 
 
@@ -40,8 +28,10 @@ class Home extends Component<IHomeProps>{
     return (
       <div className='home'>
         <Header />
-        {this.setContent.bind(this)}
-        <Sidebar />
+        <Suspense fallback={<div>Загрузка...</div>}>
+          {this.setContent()}
+        </Suspense>
+        <HomeSidebar />
         <RegistrationForm />
         <SignInForm />
       </div>
@@ -57,6 +47,37 @@ class Home extends Component<IHomeProps>{
       default:
         return <PaintBoard />
     }
->>>>>>> 8732a83001ddd044e1b29359dacf35c6f56d9bd8:src/components/Home/Home.tsx
   }
 }
+
+
+import { connect } from 'react-redux';
+import { stateType } from '../../store/store';
+
+import {
+  changeContent, contentTypes
+} from "../../store/actions/Home/Home";
+
+import { bindActionCreators } from 'redux';
+import { changeContentType } from '../../store/actions/Home/Home';
+import HomeSidebar from '../HomeSidebar/HomeSidebar';
+
+
+
+const mapStateToProps = (state: stateType) => {
+  return {
+    content: state.home.content,
+  };
+}
+
+function mapDispatchToProps(dispatch: any) {
+  return bindActionCreators({
+    changeContent,
+  }, dispatch)
+}
+
+
+export default connect<ImapStateToProps, ImapDispatchToProps, IHomeProps, stateType>(
+  mapStateToProps,
+  mapDispatchToProps
+)(Home);

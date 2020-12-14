@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Button from '../Button/Button';
 import TextField from '../TextField/TextField';
 import './SignInForm.scss';
 

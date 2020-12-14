@@ -2,25 +2,50 @@ const path = require("path");
 const webpack = require("webpack");
 
 module.exports = {
-  entry: "./src/pages/index.tsx",
+  entry: "./src/App.tsx",
   mode: "development",
   module: {
     rules: [
       {
-        test: /\.(js|jsx)$/,
+        test: /\.(ts|tsx)$/,
         exclude: /(node_modules|bower_components)/,
-        loader: "babel-loader",
-        options: { presets: ["@babel/env"] }
+        // loader:
+        use:[
+          'ts-loader',
+        //  "babel-loader",
+        ]
       },
       {
         test: /\.css$/,
         use: ["style-loader", "css-loader"]
-      }
+      },
+
+      {
+        test: /\.scss$/,
+        use: [
+          // Creates `style` nodes from JS strings
+          { loader: 'style-loader' },
+          // {
+          //     loader: MiniCssExtractPlugin.loader,
+          // },
+          // Translates CSS into CommonJS
+          { loader: 'css-loader' },
+          // { loader: 'postcss-loader' },
+          // { loader: 'resolve-url-loader' },
+          {
+            // Compiles Sass to CSS
+            loader: 'sass-loader',
+            options: {
+              sourceMap: true
+            }
+          }
+        ]
+      },
     ]
   },
-  resolve: { extensions: ["*", ".ts", ".tsx"] },
+  resolve: { extensions: ["*", ".ts", ".tsx",'.js'] },
   output: {
-    path: path.resolve(__dirname, "dist/"),
+    path: path.resolve(__dirname, "public/dist/"),
     publicPath: "/dist/",
     filename: "bundle.js"
   },

@@ -1,6 +1,6 @@
-import React, { Component } from 'react'
-import Button from '../Button/Button'
-import Sidebar from '../Sidebar/Sidebar'
+import React, { Component } from 'react';
+import Button from '../Button/Button';
+import Sidebar from '../Sidebar/Sidebar';
 
 
 
@@ -17,7 +17,7 @@ class PersonalAccountSideBar extends Component<IPersonalAccountSideBarProps> {
     return (
       <>
         <Sidebar>
-          <Button name='Мои модели'/>
+          {[<Button name='Мои модели'/>]}
         </Sidebar>
       </>
     )
