@@ -5,10 +5,10 @@ import Button from '../Button/Button';
 
 
 interface IFormProps {
-  closeHandler?: () => void;
-  submitFormHandler?: (event: React.FormEvent<HTMLFormElement>) => void;
-  name?: string;
-  submitButtonName?: string;
+  closeHandler: () => void;
+  submitFormHandler: (event: React.FormEvent<HTMLFormElement>) => void;
+  name: string;
+  submitButtonName: string;
 }
 
 export default class Form extends Component<IFormProps> {

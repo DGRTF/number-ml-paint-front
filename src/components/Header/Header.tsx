@@ -32,12 +32,15 @@ class Header extends Component<IHeaderProps>{
           <>
             <Button name='Menu'
               handler={this.showSidebar.bind(this)} />
+            <Link to='/'>
+              <Button name='Главная' />
+            </Link>
             <div className='header__menu'></div>
             <div className='header__label'></div>
 
             <div className='header__in'>
               <Link to='personal'>
-                <Button key='1' name={this.props.name} />
+                <Button name={this.props.name} />
               </Link>
               <Button name='Выйти'
                 handler={this.exitProfile.bind(this)} />
