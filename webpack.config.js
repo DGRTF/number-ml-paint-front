@@ -10,16 +10,34 @@ module.exports = {
         test: /\.(ts|tsx)$/,
         exclude: /(node_modules|bower_components)/,
         // loader:
-        use:[
+        use: [
           'ts-loader',
-        //  "babel-loader",
+          //  "babel-loader",
         ]
       },
       {
         test: /\.css$/,
         use: ["style-loader", "css-loader"]
       },
-
+      {
+        test: /\.(ttf|woff|woff2|eot)$/,
+        loader: 'file-loader',
+        options: {
+          name: '[name].[ext]',
+          outputPath: 'fonts',
+          publicPath: "./dist/fonts"
+        }
+      },
+      {
+        test: /\.(svg|jpeg|jpg)$/,
+        include: [path.join(__dirname, "src/img")],
+        loader: 'file-loader',
+        options: {
+          name: '[name].[ext]',
+          outputPath: 'img',
+          publicPath: "./dist/img"
+        }
+      },
       {
         test: /\.scss$/,
         use: [
@@ -43,7 +61,7 @@ module.exports = {
       },
     ]
   },
-  resolve: { extensions: ["*", ".ts", ".tsx",'.js'] },
+  resolve: { extensions: ["*", ".ts", ".tsx", '.js'] },
   output: {
     path: path.resolve(__dirname, "public/dist/"),
     publicPath: "/dist/",

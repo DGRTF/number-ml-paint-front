@@ -1,0 +1,48 @@
+.upload-file {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 2em;
+  font-family: 'Material Icons', Helvetica, sans-serif;
+  cursor: pointer;
+  color: rgba(255, 255, 255, 0.5);
+
+  &:hover {
+    background-color: rgb(60, 60, 60);
+    color: #ffffff;
+
+    & > hr {
+      background-color: #ffffff;
+    }
+  }
+
+  &:focus {
+    background-color: rgb(60, 60, 60);
+    color: #ffffff;
+
+    & > hr {
+      background-color: #ffffff;
+    }
+  }
+
+  &__file-icon {
+    font-size: 2em;
+  }
+
+  &__vertical-line {
+    border: none;
+    width: 1px;
+    height: 80%;
+    background-color: rgba(255, 255, 255, 0.5);
+    margin: 0;
+  }
+
+  &__file-name {
+    font-family: Arial, Helvetica, sans-serif;
+  }
+
+  &__input {
+    display: none;
+  }
+}

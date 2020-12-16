@@ -21,9 +21,9 @@ export default function Index() {
         <React.StrictMode>
           <div className='index'>
             <Switch>
-              <Suspense fallback={<div>Загрузка...</div>}>
-                <Route exact path="/" component={Home} />
-                <Route path="/personal" component={PersonalAccount} />
+              <Suspense fallback={''}>
+              <Route exact path="/" component={Home} />
+              <Route path="/personal" component={PersonalAccount} />
               </Suspense>
             </Switch>
           </div>

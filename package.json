@@ -27,6 +27,7 @@
   },
   "devDependencies": {
     "css-loader": "^5.0.1",
+    "file-loader": "^6.2.0",
     "flow-bin": "^0.140.0",
     "sass": "^1.30.0",
     "sass-loader": "^10.1.0",

@@ -24,13 +24,14 @@ class Home extends Component<IHomeProps>{
   render() {
     return (
       <div className='home'>
-        <Header />
-        <Suspense fallback={<div>Загрузка...</div>}>
+        {/* <Header /> */}
+        <UploadFile name='t'/>
+        {/* <Suspense fallback={<div>Загрузка...</div>}>
           {this.setContent()}
         </Suspense>
         <HomeSidebar />
         <RegistrationForm />
-        <SignInForm />
+        <SignInForm /> */}
       </div>
     );
   }
@@ -58,6 +59,7 @@ import {
 import { bindActionCreators } from 'redux';
 import { changeContentType } from '../../store/actions/Home/Home';
 import HomeSidebar from '../../components/HomeSidebar/HomeSidebar';
+import UploadFile from '../../components/UploadFile/UploadFile';
 
 
 
