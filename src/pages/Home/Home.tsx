@@ -4,6 +4,7 @@ import './Home.scss';
 import Header from "../../components/Header/Header";
 import RegistrationForm from "../../components/RegistrationForm/RegistrationForm";
 import SignInForm from "../../components/SignIn/SignInForm";
+import MyModels from '../../components/MyModels/MyModels';
 
 const PaintBoard = React.lazy(() => import('../../components/PaintBoard/PaintBoard'));
 const VideoStream = React.lazy(() => import('../../components/VideoStream/VideoStream'));
@@ -24,14 +25,14 @@ class Home extends Component<IHomeProps>{
   render() {
     return (
       <div className='home'>
-        {/* <Header /> */}
-        <UploadFile name='t'/>
-        {/* <Suspense fallback={<div>Загрузка...</div>}>
+        {/* <MyModels/> */}
+        <Header />
+        <Suspense fallback={<div>Загрузка...</div>}>
           {this.setContent()}
         </Suspense>
         <HomeSidebar />
         <RegistrationForm />
-        <SignInForm /> */}
+        <SignInForm />
       </div>
     );
   }
@@ -59,7 +60,6 @@ import {
 import { bindActionCreators } from 'redux';
 import { changeContentType } from '../../store/actions/Home/Home';
 import HomeSidebar from '../../components/HomeSidebar/HomeSidebar';
-import UploadFile from '../../components/UploadFile/UploadFile';
 
 
 

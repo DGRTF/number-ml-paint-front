@@ -1,16 +1,13 @@
-.upload-file {
-  width: 100%;
+.file {
   display: flex;
-  justify-content: space-around;
+  justify-content: start;
   align-items: center;
   height: 2em;
-  font-family: 'Material Icons', Helvetica, sans-serif;
-  cursor: pointer;
   color: rgba(255, 255, 255, 0.5);
-  box-shadow: 0 5px 10px rgba(0,0,0,0.5);
+  // border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+  box-shadow: 0 -5px 10px rgba(0, 0, 0, 0.5);
 
   &:hover {
-    background-color: rgb(60, 60, 60);
     color: #ffffff;
 
     & > hr {
@@ -19,7 +16,6 @@
   }
 
   &:focus {
-    background-color: rgb(60, 60, 60);
     color: #ffffff;
 
     & > hr {
@@ -31,9 +27,11 @@
     margin: 0 0.5em 0 0.5em;
   }
 
-  &__file-icon {
+  & > button {
+    font-family: 'Material Icons', Helvetica, sans-serif;
     font-size: 2em;
     margin: 0 0.25em 0 0.25em;
+    max-height: 1em;
   }
 
   &__vertical-line {
@@ -44,13 +42,8 @@
     background-color: rgba(255, 255, 255, 0.5);
   }
 
-  &__file-name {
-    white-space: nowrap;
+  &__name {
     overflow: hidden;
-    font-family: Arial, Helvetica, sans-serif;
-  }
-
-  &__input {
-    display: none;
+    white-space: nowrap;
   }
 }

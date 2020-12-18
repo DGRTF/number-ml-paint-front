@@ -4,6 +4,7 @@ import header from './Header/Header';
 import { signInForm } from './SignInForm/SignInForm';
 import { sidebar } from './Sidebar/Sidebar';
 import { home } from './Home/Home';
+import { myModels } from './MyModels/MyModels';
 
 const appReducers = combineReducers({
   registrationFormReducer,
@@ -11,6 +12,7 @@ const appReducers = combineReducers({
   signInForm,
   sidebar,
   home,
+  myModels,
 });
 
 export default appReducers;
