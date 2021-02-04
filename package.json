@@ -5,8 +5,9 @@
   "version": "0.1.0",
   "license": "MIT",
   "scripts": {
-    "start:dev": "webpack-dev-server",
+    "start": "webpack-dev-server",
     "build": "webpack",
+    "build:prod": "webpack --mode=production",
     "flow": "flow"
   },
   "dependencies": {

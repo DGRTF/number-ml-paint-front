@@ -37,8 +37,8 @@ export default class PaintBoard extends Component<{}, IPaintBoardState> {
         />
         <TextField
           name='Результат:'
-          value={`${this.state.numberResponse ? this.state.numberResponse : ""}`} 
-          readonly={true}/>
+          value={`${this.state.numberResponse ? this.state.numberResponse : ""}`}
+          readonly={true} />
       </div>
     )
   }
@@ -50,26 +50,33 @@ export default class PaintBoard extends Component<{}, IPaintBoardState> {
   private paint: boolean;
 
   private canvas_mousedown(ev: React.MouseEvent) {
-    this.canvas = ev.target as HTMLCanvasElement;
+    if (!this.canvas) {
+      this.canvas = ev.target as HTMLCanvasElement;
+      this.ctx = this.canvas.getContext('2d');
+      this.ctx.lineCap = 'round';
+      this.ctx.lineWidth = 30;
+      this.ctx.strokeStyle = "#FFFFFF";
+    }
+    
     this.paint = true;
-    this.ctx = this.canvas.getContext('2d');
-    this.ctx.beginPath();
     const coordinate = this.canvas.getBoundingClientRect();
-    const resultX = ev.clientX - coordinate.left - 2;
-    const resultY = ev.clientY - coordinate.top - 2;
+    const resultX = ev.clientX - coordinate.left;
+    const resultY = ev.clientY - coordinate.top;
     this.ctx.moveTo(resultX, resultY);
-    this.ctx.fillStyle = "#FFFFFF";
+    this.ctx.lineTo(resultX, resultY);
+    this.ctx.stroke();
   }
 
   private canvas_mousemove(ev: React.MouseEvent) {
     if (this.paint) {
       const coordinate = this.canvas.getBoundingClientRect();
-      const resultX = ev.clientX - coordinate.left - 2;
-      const resultY = ev.clientY - coordinate.top - 2;
-      this.ctx.arc(resultX, resultY, 15, 0, 2 * Math.PI);
-      this.ctx.moveTo(resultX, resultY);
-      this.ctx.fill();
+      const resultX = ev.clientX - coordinate.left;
+      const resultY = ev.clientY - coordinate.top;
+
+      this.ctx.lineTo(resultX, resultY);
+      this.ctx.stroke();
       this.ctx.closePath();
+      this.ctx.moveTo(resultX, resultY);
     };
   }
 
@@ -95,9 +102,7 @@ export default class PaintBoard extends Component<{}, IPaintBoardState> {
       const blob = await new Promise<Blob>(resolve => this.canvas.toBlob(resolve, 'image/jpeg'));
       const formData = new FormData();
       formData.append('file', blob);
-      const out = {
-        file: blob,
-      }
+      
       const response = await fetch('/AINumber/DefineNumber', {
         method: 'POST',
         headers: {

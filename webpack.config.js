@@ -2,6 +2,7 @@ const path = require("path");
 const webpack = require("webpack");
 
 module.exports = {
+  target: ['web', 'es3'],
   entry: "./src/App.tsx",
   mode: "development",
   module: {
@@ -30,7 +31,7 @@ module.exports = {
       },
       {
         test: /\.(svg|jpeg|jpg)$/,
-        include: [path.join(__dirname, "src/img")],
+        include: [path.join(__dirname, "src/assets")],
         loader: 'file-loader',
         options: {
           name: '[name].[ext]',

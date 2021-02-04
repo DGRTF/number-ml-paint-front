@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 import './VideoStream.scss';
 
 import Button from '../Button/Button'
@@ -35,7 +35,7 @@ export default class VideoStream extends Component {
       let canvas = document.getElementById('canvas') as HTMLCanvasElement;
       this.ctx = canvas.getContext('2d');
 
-      let socket = new WebSocket(`wss://${location.hostname}/WebSocketDataAI/Connect`);
+      let socket = new WebSocket(`wss://${location.hostname}:${location.port}/WebSocketDataAI/Connect`);
       socket.onopen = () => {
         let outputData: number[] = [];
 
