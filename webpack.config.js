@@ -4,14 +4,18 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const TerserPlugin = require("terser-webpack-plugin");
 
 let rootDirectory = '';
+let devTool = 'eval-source-map';
 
 module.exports = (env, options) => {
-  if (options.mode === 'production')
-    rootDirectory = '/FSD';
+  if (options.mode === 'production') {
+    rootDirectory = '';
+    devTool = true;
+  }
 
   return {
     target: ['web', 'es3'],
     entry: "./src/App.tsx",
+    devtool: devTool,
     optimization: {
       minimize: true,
       minimizer: [

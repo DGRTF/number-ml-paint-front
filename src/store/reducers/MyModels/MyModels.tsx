@@ -1,6 +1,6 @@
+import { Models } from '../../../api/aiModels';
 import {
   setModels,
-  Models,
 } from '../../actions/MyModels/MyModels';
 
 export type ActionTypes =

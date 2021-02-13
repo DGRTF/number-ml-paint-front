@@ -5,6 +5,7 @@ import Button from '../Button/Button';
 import UploadFile from '../UploadFile/UploadFile';
 import File from '../File/File';
 import List from '../List/List';
+import { addAIModel, Models } from '../../api/aiModels';
 
 
 
@@ -51,19 +52,8 @@ class MyModels extends Component<IMyModelsProps> {
     const form = event.target as HTMLFormElement;
     const formData = new FormData(form);
 
-    const response = await fetch('AIModels/AddAIModel', {
-      method: 'POST',
-      headers: {
-        "Authorization": "Bearer " + localStorage.getItem('access_token'),
-        // 'Content-Disposition': 'form-data; name="file"; filename="AISingleNumberModel.onnx"',
-      },
-      body: formData,
-    });
-
-    if (response.ok)
-      return;
-    else
-      alert(response.statusText);
+    await addAIModel(formData);
+    this.props.getModels();
   }
 
   send() {
@@ -98,7 +88,6 @@ import { stateType } from '../../store/store';
 import {
   getModels,
   getModelsType,
-  Models,
 } from "../../store/actions/MyModels/MyModels";
 
 import { bindActionCreators } from 'redux';

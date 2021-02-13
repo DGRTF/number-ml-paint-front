@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 import './Header.scss';
+import { createBrowserHistory } from "history";
 
 import Button from '../Button/Button';
 
@@ -24,6 +25,8 @@ class Header extends Component<IHeaderProps>{
   constructor(props: any) {
     super(props);
   }
+
+  private readonly history = createBrowserHistory();
 
   render() {
     return (
@@ -93,6 +96,11 @@ class Header extends Component<IHeaderProps>{
     this.props.changeName({
       name: null,
     });
+
+    // Вернуться на главную
+    this.props.history.push("componentpath");
+    this.history.push('/');
+    this.history.go(1);
   }
 
   showSidebar() {

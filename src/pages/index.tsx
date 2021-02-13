@@ -18,7 +18,6 @@ export default function Index() {
   return (
     <Provider store={store}>
       <Router history={history}>
-        {/* <React.StrictMode> */}
           <div className='index'>
             <Switch>
               <Suspense fallback={''}>
@@ -27,7 +26,6 @@ export default function Index() {
               </Suspense>
             </Switch>
           </div>
-        {/* </React.StrictMode> */}
       </Router>
     </Provider>
   );

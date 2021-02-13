@@ -1,23 +1,13 @@
 import { stateType } from '../../store';
 import { getLiteralFromString } from '../actions';
+import { Models, getMyModels } from '../../../api/aiModels';
 
 
-
-export interface Models {
-  id: number;
-  name: string;
-}
 
 export function getModels() {
   return async function (dispatch: any, getState: () => stateType) {
-    const response = await fetch('AIModels/GetMyModels', {
-      method: 'GET',
-      headers: {
-        "Authorization": "Bearer " + localStorage.getItem('access_token'),
-      }
-    });
+    const models: Models[] = await getMyModels();
 
-    const models: Models[] = await response.json();
     dispatch(setModels({
       models
     }));
