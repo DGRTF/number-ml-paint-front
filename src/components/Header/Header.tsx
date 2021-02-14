@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import './Header.scss';
 import { createBrowserHistory } from "history";
 
@@ -19,7 +19,9 @@ interface ImapStateToProps {
   name?: string;
 }
 
-interface IHeaderProps extends ImapDispatchToProps, ImapStateToProps { }
+interface IHeaderProps extends ImapDispatchToProps, ImapStateToProps {
+  history?: any;
+ }
 
 class Header extends Component<IHeaderProps>{
   constructor(props: any) {
@@ -98,9 +100,7 @@ class Header extends Component<IHeaderProps>{
     });
 
     // Вернуться на главную
-    this.props.history.push("componentpath");
-    this.history.push('/');
-    this.history.go(1);
+    this.props.history.push("/");
   }
 
   showSidebar() {
@@ -158,4 +158,4 @@ function mapDispatchToProps(dispatch: any) {
 export default connect<ImapStateToProps, ImapDispatchToProps, IHeaderProps, stateType>(
   mapStateToProps,
   mapDispatchToProps
-)(Header);
+)(withRouter(Header));

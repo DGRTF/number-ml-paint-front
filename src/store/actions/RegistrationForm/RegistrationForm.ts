@@ -4,26 +4,19 @@ import { changeName } from '../Header/Header';
 
 
 
-export function registration(formData: FormData) {
+export function registration(formData:FormData, authorize: (formData: FormData) => Promise<boolean>) {
   return async function (dispatch: any, getState: () => stateType) {
-    fetch('login', {
-      method: 'POST',
-      body: formData,
-    }).then(response => {
-      if (response.ok) {
-        dispatch(showHiddenRegistrationForm({
-          visible: false,
-        }));
-      }
-      return response.json();
-    })
-      .then(json => {
-        localStorage.setItem('access_token', json.access_token);
-        localStorage.setItem('user_name', json.username);
-        dispatch(changeName({
-          name: json.username,
-        }));
-      });
+    const isOk = await authorize(formData);
+
+    if (isOk) {
+      dispatch(showHiddenRegistrationForm({
+        visible: false,
+      }));
+
+      dispatch(changeName({
+        name: localStorage.getItem('username') || '',
+      }));
+    }
   }
 }
 

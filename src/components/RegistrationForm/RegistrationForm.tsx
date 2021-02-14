@@ -56,8 +56,8 @@ class RegistrationForm extends Component<IRegistrationFormProps> {
 
     if (pass === againPass) {
       formData.delete('again-password');
-      this.props.registration(formData);
-    }else{
+      this.props.registration(formData, authorize);
+    } else {
       alert('Пароли не совпадают');
     }
   }
@@ -83,6 +83,7 @@ import {
 } from "../../store/actions/RegistrationForm/RegistrationForm";
 
 import { bindActionCreators } from 'redux';
+import { authorize } from '../../api/authorize';
 
 
 
