@@ -1,7 +1,7 @@
-const path = require("path");
-const webpack = require("webpack");
+const path = require('path');
+const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const TerserPlugin = require("terser-webpack-plugin");
+const TerserPlugin = require('terser-webpack-plugin');
 
 let rootDirectory = '';
 let devTool = 'eval-source-map';
@@ -9,12 +9,12 @@ let devTool = 'eval-source-map';
 module.exports = (env, options) => {
   if (options.mode === 'production') {
     rootDirectory = '';
-    devTool = true;
+    devTool = undefined;
   }
 
   return {
-    target: ['web', 'es3'],
-    entry: "./src/App.tsx",
+    target: ['web', 'es5'],
+    entry: './src/App.tsx',
     devtool: devTool,
     optimization: {
       minimize: true,
@@ -33,11 +33,11 @@ module.exports = (env, options) => {
           use: [
             'ts-loader',
             //  "babel-loader",
-          ]
+          ],
         },
         {
           test: /\.css$/,
-          use: ["style-loader", "css-loader"]
+          use: ['style-loader', 'css-loader'],
         },
         {
           test: /\.(ttf|woff|woff2|eot)$/,
@@ -45,18 +45,18 @@ module.exports = (env, options) => {
           options: {
             name: '[name].[ext]',
             outputPath: 'fonts',
-            publicPath: rootDirectory + "/fonts"
-          }
+            publicPath: `${rootDirectory}/fonts`,
+          },
         },
         {
           test: /\.(svg|jpeg|jpg)$/,
-          include: [path.join(__dirname, "src/assets")],
+          include: [path.join(__dirname, 'src/assets')],
           loader: 'file-loader',
           options: {
             name: '[name].[ext]',
             outputPath: 'img',
-            publicPath: rootDirectory + "/img"
-          }
+            publicPath: `${rootDirectory}/img`,
+          },
         },
         {
           test: /\.scss$/,
@@ -74,31 +74,31 @@ module.exports = (env, options) => {
               // Compiles Sass to CSS
               loader: 'sass-loader',
               options: {
-                sourceMap: true
-              }
-            }
-          ]
+                sourceMap: true,
+              },
+            },
+          ],
         },
-      ]
+      ],
     },
-    resolve: { extensions: ["*", ".ts", ".tsx", '.js'] },
+    resolve: { extensions: ['*', '.ts', '.tsx', '.js'] },
     output: {
-      path: path.resolve(__dirname, "dist/"),
+      path: path.resolve(__dirname, 'dist/'),
       publicPath: rootDirectory,
-      filename: "bundle.js"
+      filename: 'bundle.js',
     },
     devServer: {
-      contentBase: path.join(__dirname, "public/"),
+      contentBase: path.join(__dirname, 'public/'),
       port: 3000,
-      publicPath: "http://localhost:3000/",
+      publicPath: 'http://localhost:3000/',
       hotOnly: false,
     },
     plugins: [
       new webpack.HotModuleReplacementPlugin(),
       new HtmlWebpackPlugin({
-        template: "./public/index.html",
+        template: './public/index.html',
         // favicon: "./public/favicon.ico"
       }),
-    ]
-  }
-}
+    ],
+  };
+};
