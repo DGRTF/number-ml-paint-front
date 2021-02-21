@@ -4,21 +4,18 @@ import {
 } from '../../actions/Home/Home';
 
 export type ActionTypes =
-  ReturnType<typeof changeContent>
-  ;
-
-export const home = function (state: {
+  ReturnType<typeof changeContent>;
+export const home = (state: {
   content: contentTypes
 } = {
-    content: 'PaintBoard'
-  }, action: ActionTypes) {
+  content: 'PaintBoard',
+}, action: ActionTypes) => {
   switch (action.type) {
-    case "SET_CONTENT":
-      return { ...state, content: action.payload.content }
+    case 'SET_CONTENT':
+      return { ...state, content: action.payload.content };
     default:
-      return state
+      return state;
   }
-}
-
+};
 
 export default home;

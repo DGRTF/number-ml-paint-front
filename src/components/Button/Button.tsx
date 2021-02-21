@@ -1,18 +1,20 @@
-import React, { Component } from 'react';
+import React from 'react';
 import './Button.scss';
 
-interface ButtonProps {
+export interface ButtonProps {
   name?: string;
   handler?: (ev: React.MouseEvent) => void;
+  type?: 'button' | 'submit' | 'reset';
 }
 
-export default class Button extends Component<ButtonProps, {}> {
-  render() {
-    return (
-      <button
-        className='button'
-        onClick={this.props.handler?.bind(this)}
-      >{this.props.name ? this.props.name : ""}</button>
-    )
-  }
+export default function Button(props: ButtonProps) {
+  return (
+    <button
+      type={props.type ? props.type : 'button'}
+      className="button"
+      onClick={props.handler?.bind(this)}
+    >
+      {props.name ? props.name : ''}
+    </button>
+  );
 }

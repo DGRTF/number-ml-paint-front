@@ -1,43 +1,30 @@
 import React, { Component } from 'react';
 import './VideoStream.scss';
 
-import Button from '../Button/Button'
+import Button from '../Button/Button';
 
 export default class VideoStream extends Component {
   ctx: CanvasRenderingContext2D;
 
   video: HTMLVideoElement;
 
+  // eslint-disable-next-line no-undef
   interval: NodeJS.Timeout;
 
   stream: MediaStream;
 
-  render() {
-    return (
-      <div className='video-stream'>
-        <video id='video'
-          className='video-stream__video'>Video stream not available.</video>
-        <canvas id='canvas'
-          className='video-stream__canvas'></canvas>
-        <Button name='Play'
-          handler={this.playVideo.bind(this)} />
-        <Button name='Pause'
-          handler={this.pauseVideo.bind(this)} />
-      </div>
-    )
-  }
-
-  playVideo() {
-    let token = localStorage.getItem('access_token');
+  private playVideo = () => {
+    const token = localStorage.getItem('access_token');
 
     if (token) {
       this.video = document.getElementById('video') as HTMLVideoElement;
-      let canvas = document.getElementById('canvas') as HTMLCanvasElement;
+      const canvas = document.getElementById('canvas') as HTMLCanvasElement;
       this.ctx = canvas.getContext('2d');
 
-      let socket = new WebSocket(`wss://${location.hostname}:${location.port}/WebSocketDataAI/Connect`);
+      // eslint-disable-next-line no-restricted-globals
+      const socket = new WebSocket(`wss://${location.hostname}:${location.port}/WebSocketDataAI/Connect`);
       socket.onopen = () => {
-        let outputData: number[] = [];
+        const outputData: number[] = [];
 
         navigator.mediaDevices.getUserMedia({ video: true, audio: false })
           .then((stream) => {
@@ -46,17 +33,17 @@ export default class VideoStream extends Component {
 
             this.interval = setInterval(() => {
               this.ctx.drawImage(this.video, 0, 0, canvas.width, canvas.height);
-              let image = this.ctx.getImageData(0, 0, 28, 28);
+              const image = this.ctx.getImageData(0, 0, 28, 28);
 
               outputData.length = 0;
-              let count = image.data.length / 4;
+              const count = image.data.length / 4;
 
-              for (let i = 0; i < count; i++) {
-                let r = image.data[i * 4];
-                let g = image.data[i * 4 + 1];
-                let b = image.data[i * 4 + 2];
+              for (let i = 0; i < count; i += 1) {
+                const r = image.data[i * 4];
+                const g = image.data[i * 4 + 1];
+                const b = image.data[i * 4 + 2];
 
-                let result = Math.round((r + g + b) / 3);
+                const result = Math.round((r + g + b) / 3);
 
                 outputData.push(result);
               }
@@ -68,18 +55,42 @@ export default class VideoStream extends Component {
 
             this.video.play();
           })
-          .catch(function (err) {
-            console.log("An error occurred: " + err);
+          .catch((err) => {
+            console.log(`An error occurred: ${err}`);
           });
-      }
+      };
     }
   }
 
-  pauseVideo() {
+  private pauseVideo = () => {
     this.video.pause();
     clearInterval(this.interval);
-    this.stream.getTracks().forEach(el =>
-      el.stop()
+    this.stream.getTracks().forEach((el) => el.stop());
+  }
+
+  render() {
+    return (
+      <div className="video-stream">
+        <video
+          id="video"
+          className="video-stream__video"
+        >
+          <track kind="captions" />
+          Video stream not available.
+        </video>
+        <canvas
+          id="canvas"
+          className="video-stream__canvas"
+        />
+        <Button
+          name="Play"
+          handler={this.playVideo}
+        />
+        <Button
+          name="Pause"
+          handler={this.pauseVideo}
+        />
+      </div>
     );
   }
 }

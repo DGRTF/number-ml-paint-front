@@ -3,21 +3,19 @@ import {
 } from '../../actions/RegistrationForm/RegistrationForm';
 
 export type ActionTypes =
-  ReturnType<typeof showHiddenRegistrationForm>
-  ;
+  ReturnType<typeof showHiddenRegistrationForm>;
 
-export const registrationFormReducer = function (state: {
+function registrationFormReducer(state: {
   visible: boolean
 } = {
-  visible: false
-  }, action: ActionTypes) {
+  visible: false,
+}, action: ActionTypes) {
   switch (action.type) {
-    case "SHOW_HIDDEN_REGISTRATION_FORM":
-      return { ...state, visible: action.payload.visible }
+    case 'SHOW_HIDDEN_REGISTRATION_FORM':
+      return { ...state, visible: action.payload.visible };
     default:
-      return state
+      return state;
   }
 }
-
 
 export default registrationFormReducer;

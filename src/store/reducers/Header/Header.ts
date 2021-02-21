@@ -3,21 +3,18 @@ import {
 } from '../../actions/Header/Header';
 
 export type ActionTypes =
-  ReturnType<typeof changeName>
-  ;
-
-export const header = function (state: {
+  ReturnType<typeof changeName>;
+export const header = (state: {
   name: string;
 } = {
-    name: null
-  }, action: ActionTypes) {
+  name: null,
+}, action: ActionTypes) => {
   switch (action.type) {
-    case "CHANGE_NAME":
-      return { ...state, name: action.payload.name }
+    case 'CHANGE_NAME':
+      return { ...state, name: action.payload.name };
     default:
-      return state
+      return state;
   }
-}
-
+};
 
 export default header;

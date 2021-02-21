@@ -1,13 +1,14 @@
 async function deleteModel(modelName: string) {
-  const response = await fetch("AIModels/DeleteModel/?modelName=" + modelName, {
+  const response = await fetch(`AIModels/DeleteModel/?modelName=${modelName}`, {
     method: 'DELETE',
     headers: {
-      "Authorization": "Bearer " + localStorage.getItem('access_token'),
+      Authorization: `Bearer ${localStorage.getItem('access_token')}`,
     },
   });
 
-  if (response.ok) {
-
+  if (!response.ok) {
+    const responseText = await response.json();
+    alert(responseText);
   }
 }
 
@@ -15,16 +16,14 @@ async function addAIModel(formData: FormData) {
   const response = await fetch('AIModels/AddAIModel', {
     method: 'POST',
     headers: {
-      "Authorization": "Bearer " + localStorage.getItem('access_token'),
+      Authorization: `Bearer ${localStorage.getItem('access_token')}`,
       // 'Content-Disposition': 'form-data; name="file"; filename="AISingleNumberModel.onnx"',
     },
     body: formData,
   });
 
-  if (response.ok)
-    return;
-  else
-    alert(response.statusText);
+  if (response.ok) return;
+  alert(response.statusText);
 }
 
 interface Models {
@@ -36,11 +35,15 @@ async function getMyModels(): Promise<Models[]> {
   const response = await fetch('AIModels/GetMyModels', {
     method: 'GET',
     headers: {
-      "Authorization": "Bearer " + localStorage.getItem('access_token'),
-    }
+      Authorization: `Bearer ${localStorage.getItem('access_token')}`,
+    },
   });
 
-  return await response.json();
+  const models: Models[] = await response.json();
+
+  return models;
 }
 
-export { getMyModels, addAIModel, deleteModel, Models };
+export {
+  getMyModels, addAIModel, deleteModel, Models,
+};

@@ -3,21 +3,19 @@ import {
 } from '../../actions/SignInForm/SignInForm';
 
 export type ActionTypes =
-  ReturnType<typeof showHiddenSignInForm>
-  ;
+  ReturnType<typeof showHiddenSignInForm>;
 
-export const signInForm = function (state: {
+function signInForm(state: {
   visible: boolean;
 } = {
-  visible: false
-  }, action: ActionTypes) {
+  visible: false,
+}, action: ActionTypes) {
   switch (action.type) {
     case 'SHOW_HIDDEN_SIGN_IN_FORM':
-      return { ...state, visible: action.payload.visible }
+      return { ...state, visible: action.payload.visible };
     default:
-      return state
+      return state;
   }
 }
-
 
 export default signInForm;

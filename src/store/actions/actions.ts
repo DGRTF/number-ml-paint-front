@@ -1,5 +1,3 @@
-
-
-export function getLiteralFromString<T extends string>(str: T): T {
+export default function getLiteralFromString<T extends string>(str: T): T {
   return str;
 }

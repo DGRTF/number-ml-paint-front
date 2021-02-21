@@ -3,21 +3,19 @@ import {
 } from '../../actions/Sidebar/Sidebar';
 
 export type ActionTypes =
-  ReturnType<typeof showHiddenSidebar>
-  ;
+  ReturnType<typeof showHiddenSidebar>;
 
-export const sidebar = function (state: {
+function sidebar(state: {
   visible: boolean
 } = {
-  visible: false
-  }, action: ActionTypes) {
+  visible: false,
+}, action: ActionTypes) {
   switch (action.type) {
-    case "SHOW_HIDDEN_SIDEBAR":
-      return { ...state, visible: action.payload.visible }
+    case 'SHOW_HIDDEN_SIDEBAR':
+      return { ...state, visible: action.payload.visible };
     default:
-      return state
+      return state;
   }
 }
-
 
 export default sidebar;

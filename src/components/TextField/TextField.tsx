@@ -1,11 +1,9 @@
-import React, { Component } from 'react';
+import React from 'react';
 import './TextField.scss';
-
-
 
 type inputType = 'password'|'text';
 
-interface TextFieldProps {
+export interface TextFieldProps {
   name?: string;
   value?: string;
   readonly?: boolean;
@@ -14,20 +12,18 @@ interface TextFieldProps {
   required?: boolean;
 }
 
-export default class TextField extends Component<TextFieldProps> {
-  render() {
-    return (
-      <label className='text-field'>
-          {this.props.name}
-          <input
-            name={this.props.nameField}
-            className='text-field__field'
-            readOnly={this.props.readonly}
-            required={this.props.required}
-            value={this.props.value}
-            type={this.props.type? `${this.props.type}`:'text'}>
-          </input>
-        </label>
-    )
-  }
+export default function TextField(props:TextFieldProps) {
+  return (
+    <label className="text-field">
+      {props.name}
+      <input
+        name={props.nameField}
+        className="text-field__field"
+        readOnly={props.readonly}
+        required={props.required}
+        value={props.value}
+        type={props.type ? `${props.type}` : 'text'}
+      />
+    </label>
+  );
 }

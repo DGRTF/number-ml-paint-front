@@ -1,12 +1,34 @@
 import React, { Component } from 'react';
-import { Link, withRouter } from "react-router-dom";
+import { Link, withRouter } from 'react-router-dom';
 import './Header.scss';
-import { createBrowserHistory } from "history";
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { createBrowserHistory } from 'history';
 
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import Button from '../Button/Button';
 
+import { stateType } from '../../store/store';
 
+import {
+  showHiddenRegistrationForm,
+  showHiddenRegistrationFormType,
+} from '../../store/actions/RegistrationForm/RegistrationForm';
 
+import {
+  showHiddenSignInForm,
+  showHiddenSignInFormType,
+} from '../../store/actions/SignInForm/SignInForm';
+
+import {
+  changeName,
+  changeNameType,
+} from '../../store/actions/Header/Header';
+
+import {
+  showHiddenSidebar,
+  showHiddenSidebarType,
+} from '../../store/actions/Sidebar/Sidebar';
 
 interface ImapDispatchToProps {
   showHiddenRegistrationForm?: showHiddenRegistrationFormType;
@@ -23,75 +45,43 @@ interface IHeaderProps extends ImapDispatchToProps, ImapStateToProps {
   history?: any;
  }
 
-class Header extends Component<IHeaderProps>{
-  constructor(props: any) {
-    super(props);
-  }
-
+class Header extends Component<IHeaderProps> {
   private readonly history = createBrowserHistory();
 
-  render() {
-    return (
-      <header className='header'>
-        {this.props.name ?
-          <>
-            <Button name='Menu'
-              handler={this.showSidebar.bind(this)} />
-            <Link to='/'>
-              <Button name='Главная' />
-            </Link>
-            <div className='header__menu'></div>
-            <div className='header__label'></div>
-
-            <div className='header__in'>
-              <Link to='personal'>
-                <Button name={this.props.name} />
-              </Link>
-              <Button name='Выйти'
-                handler={this.exitProfile.bind(this)} />
-            </div>
-          </> :
-          <div className='header__in'>
-            <Button name='Войти'
-              handler={this.showSignInForm.bind(this)} />
-            <Button
-              name='Зарегистрироваться'
-              handler={this.showRegistrationForm.bind(this)}
-            />
-          </div>}
-      </header>
-    )
+  // eslint-disable-next-line no-useless-constructor
+  constructor(props: any) {
+    super(props);
   }
 
   componentDidMount() {
     this.initializeName();
   }
 
-  initializeName() {
+  private initializeName = () => {
     const token = localStorage.getItem('access_token');
 
     if (token) {
       const name = localStorage.getItem('user_name');
 
       this.props.changeName({
-        name: name,
+        name,
       });
     }
   }
 
-  showRegistrationForm() {
+  private showRegistrationForm = () => {
     this.props.showHiddenRegistrationForm({
       visible: true,
     });
   }
 
-  showSignInForm() {
+  private showSignInForm = () => {
     this.props.showHiddenSignInForm({
       visible: true,
-    })
+    });
   }
 
-  exitProfile() {
+  private exitProfile = () => {
     localStorage.removeItem('access_token');
     localStorage.removeItem('user_name');
 
@@ -100,50 +90,62 @@ class Header extends Component<IHeaderProps>{
     });
 
     // Вернуться на главную
-    this.props.history.push("/");
+    this.props.history.push('/');
   }
 
-  showSidebar() {
+  private showSidebar = () => {
     this.props.showHiddenSidebar({
       visible: true,
-    })
+    });
+  }
+
+  render() {
+    return (
+      <header className="header">
+        {this.props.name
+          ? (
+            <>
+              <Button
+                name="Menu"
+                handler={this.showSidebar}
+              />
+              <Link to="/">
+                <Button name="Главная" />
+              </Link>
+              <div className="header__menu" />
+              <div className="header__label" />
+
+              <div className="header__in">
+                <Link to="personal">
+                  <Button name={this.props.name} />
+                </Link>
+                <Button
+                  name="Выйти"
+                  handler={this.exitProfile}
+                />
+              </div>
+            </>
+          )
+          : (
+            <div className="header__in">
+              <Button
+                name="Войти"
+                handler={this.showSignInForm}
+              />
+              <Button
+                name="Зарегистрироваться"
+                handler={this.showRegistrationForm}
+              />
+            </div>
+          )}
+      </header>
+    );
   }
 }
 
-
-
-import { connect } from 'react-redux';
-import { stateType } from '../../store/store';
-
-import {
-  showHiddenRegistrationForm,
-  showHiddenRegistrationFormType
-} from "../../store/actions/RegistrationForm/RegistrationForm";
-
-import { bindActionCreators } from 'redux';
-
-import {
-  showHiddenSignInForm,
-  showHiddenSignInFormType
-} from '../../store/actions/SignInForm/SignInForm';
-
-import {
-  changeName,
-  changeNameType
-} from '../../store/actions/Header/Header';
-
-import {
-  showHiddenSidebar,
-  showHiddenSidebarType
-} from '../../store/actions/Sidebar/Sidebar';
-
-
-
-const mapStateToProps = (state: stateType) => {
-  return {
-    name: state.header.name,
-  };
-}
+const mapStateToProps = (state: stateType) => ({
+  name: state.header.name,
+});
 
 function mapDispatchToProps(dispatch: any) {
   return bindActionCreators({
@@ -151,11 +153,10 @@ function mapDispatchToProps(dispatch: any) {
     showHiddenSignInForm,
     changeName,
     showHiddenSidebar,
-  }, dispatch)
+  }, dispatch);
 }
-
 
 export default connect<ImapStateToProps, ImapDispatchToProps, IHeaderProps, stateType>(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(withRouter(Header));

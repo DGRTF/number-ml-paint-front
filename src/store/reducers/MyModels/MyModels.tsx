@@ -4,21 +4,19 @@ import {
 } from '../../actions/MyModels/MyModels';
 
 export type ActionTypes =
-  ReturnType<typeof setModels>
-  ;
+  ReturnType<typeof setModels>;
 
-export const myModels = function (state: {
+function myModels(state: {
   models: Models[];
 } = {
   models: [],
-  }, action: ActionTypes) {
+}, action: ActionTypes) {
   switch (action.type) {
-    case "SET_MODELS":
-      return { ...state, models: action.payload.models }
+    case 'SET_MODELS':
+      return { ...state, models: action.payload.models };
     default:
-      return state
+      return state;
   }
 }
-
 
 export default myModels;

@@ -1,17 +1,14 @@
-import { stateType } from '../../store';
-import { getLiteralFromString } from '../actions';
+import getLiteralFromString from '../actions';
 import { Models, getMyModels } from '../../../api/aiModels';
 
-
-
 export function getModels() {
-  return async function (dispatch: any, getState: () => stateType) {
+  return async (dispatch: any) => {
     const models: Models[] = await getMyModels();
 
     dispatch(setModels({
-      models
+      models,
     }));
-  }
+  };
 }
 
 export function setModels(state: {
@@ -19,11 +16,9 @@ export function setModels(state: {
 }) {
   return {
     type: getLiteralFromString('SET_MODELS'),
-    payload: state
-  }
+    payload: state,
+  };
 }
-
-
 
 export type getModelsType = typeof getModels;
 export type setModelsType = typeof setModels;
