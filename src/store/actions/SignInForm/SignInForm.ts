@@ -1,4 +1,5 @@
 import getLiteralFromString from '../actions';
+import setAuthorized from '../authorize/authorize';
 import { changeName } from '../Header/Header';
 
 export function signIn(formData: FormData) {
@@ -10,6 +11,9 @@ export function signIn(formData: FormData) {
       if (response.ok) {
         dispatch(showHiddenSignInForm({
           visible: false,
+        }));
+        dispatch(setAuthorized({
+          isAuthorized: true,
         }));
       }
       return response.json();

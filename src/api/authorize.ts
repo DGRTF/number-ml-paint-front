@@ -4,7 +4,7 @@ interface AuthResponse {
   username: string;
 }
 
-async function authorize(formData: FormData) {
+async function authorizeJWT(formData: FormData) {
   const response = await fetch('login', {
     method: 'POST',
     body: formData,
@@ -20,8 +20,9 @@ async function authorize(formData: FormData) {
   return false;
 }
 
-function exitAuth() {
-
+function exitProfileJWT() {
+  localStorage.removeItem('access_token');
+  localStorage.removeItem('user_name');
 }
 
-export { authorize, exitAuth };
+export { authorizeJWT, exitProfileJWT };

@@ -9,4 +9,15 @@ export function changeName(state: {
   };
 }
 
+export function exitProfileChangeName(exitProfile: () => void) {
+  return async (dispatch: any) => {
+    exitProfile();
+
+    dispatch(changeName({
+      name: null,
+    }));
+  };
+}
+
 export type changeNameType = typeof changeName;
+export type exitProfileChangeNameType = typeof exitProfileChangeName;

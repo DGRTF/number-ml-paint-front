@@ -14,7 +14,7 @@ import {
   registrationType,
 } from '../../store/actions/RegistrationForm/RegistrationForm';
 
-import { authorize } from '../../api/authorize';
+import { authorizeJWT } from '../../api/authorize';
 
 interface ImapDispatchToProps {
   showHiddenRegistrationForm?: showHiddenRegistrationFormType;
@@ -37,7 +37,7 @@ class RegistrationForm extends Component<IRegistrationFormProps> {
 
     if (pass === againPass) {
       formData.delete('again-password');
-      this.props.registration(formData, authorize);
+      this.props.registration(formData, authorizeJWT);
     } else {
       alert('Пароли не совпадают');
     }

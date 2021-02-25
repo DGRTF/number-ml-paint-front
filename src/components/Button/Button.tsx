@@ -10,9 +10,9 @@ export interface ButtonProps {
 export default function Button(props: ButtonProps) {
   return (
     <button
-      type={props.type ? props.type : 'button'}
+      type={props.type || 'button'}
       className="button"
-      onClick={props.handler?.bind(this)}
+      onClick={props.handler}
     >
       {props.name ? props.name : ''}
     </button>

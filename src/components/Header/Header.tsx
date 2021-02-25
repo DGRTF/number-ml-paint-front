@@ -30,11 +30,14 @@ import {
   showHiddenSidebarType,
 } from '../../store/actions/Sidebar/Sidebar';
 
+import setAuthorized, { setAuthorizedType } from '../../store/actions/authorize/authorize';
+
 interface ImapDispatchToProps {
   showHiddenRegistrationForm?: showHiddenRegistrationFormType;
   showHiddenSignInForm?: showHiddenSignInFormType;
   changeName?: changeNameType;
   showHiddenSidebar?: showHiddenSidebarType;
+  setAuthorized?: setAuthorizedType;
 }
 
 interface ImapStateToProps {
@@ -89,8 +92,9 @@ class Header extends Component<IHeaderProps> {
       name: null,
     });
 
-    // Вернуться на главную
-    this.props.history.push('/');
+    this.props.setAuthorized({
+      isAuthorized: false,
+    });
   }
 
   private showSidebar = () => {
@@ -153,6 +157,7 @@ function mapDispatchToProps(dispatch: any) {
     showHiddenSignInForm,
     changeName,
     showHiddenSidebar,
+    setAuthorized,
   }, dispatch);
 }
 
